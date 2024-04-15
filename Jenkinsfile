@@ -26,7 +26,7 @@ pipeline {
                         git branch: 'main', url: 'https://github.com/your/repository.git', 
                             credentialsProvider: [
                                 usernamePassword(
-                                    password: env.GITHUB_TOKEN,
+                                    password: env.GITHUB_TOKEN_CREDS,
                                     username: ''
                                 )
                             ]
