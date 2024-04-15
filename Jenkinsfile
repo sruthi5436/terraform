@@ -8,53 +8,40 @@ pipeline {
         GITHUB_CREDENTIALS_ID = credentials('github-credentials-id')
         GITHUB_TOKEN_CREDS = credentials('github-token-credential-id')
         GITHUB_TOKEN_CREDS1 = credentials('github_ptoken')
+        SUBSCRIPTION_ID = credentials('subscription_id')
        
     }
     
+    agent any
     stages {
-        // stage('Build') {
-        //     steps {
-        //         // Checkout source code from version control
-        //         git 'https://github.com/sruthi5436/terraform.git'
-                
-        //         // Build Java application using Maven
-        //         sh 'mvn clean package'
-        //     }
-        // }
-        //  stage('Checkout') {
-        //     steps {
-        //         script {
-        //             withCredentials([string(credentialsId: env.GITHUB_TOKEN_CREDS1, variable: 'GITHUB_TOKEN')]) {
-        //                 git branch: 'main', url: 'https://github.com/your/repository.git', 
-        //                     credentialsProvider: [
-        //                         usernamePassword(
-        //                             password: env.GITHUB_TOKEN_CREDS1,
-        //                             username: ''
-        //                         )
-        //                     ]
-        //             }
-        //         }
-        //     }
-        // }
-        stage('Terraform Apply') {
+        stage('Checkout') {
             steps {
-                // Checkout Terraform configurations from version control
-        git branch: 'main', credentialsId: env.GITHUB_TOKEN_CREDS, url: 'https://github.com/your/repository.git'
-
-            //  git 'https://github.com/sruthi5436/terraform.git'
+                checkout scmGit(branches: [[name: '*/main']],
+                extensions: [],
+                userRemoteConfigs: [[url: 'https://github.com/sruthi5436/terraform.git']]) 
                 
-                // Initialize Terraform
-                sh 'terraform init'
-                
-                // Apply Terraform configurations to create infrastructure
-                sh 'terraform apply -auto-approve'
             }
         }
-        
+
+
+        stage('Azure Login') {
+            steps {
+                script {
+            // Execute 'az login' command
+                    sh "az login --service-principal -u ${AZURE_CLIENT_ID} -p ${AZURE_SECRET_ID} --tenant ${AZURE_TENANT_ID}"
+                    sh "az account set -s ${SUBSCRIPTION_ID}"
+        }
     }
 }
 
-
-
-
-
+     
+    stage('Deploy') {
+            steps {
+                sh label: '', script: "terraform init"
+                sh label: '', script: "terraform plan"
+                sh label: '', script: "terraform apply -auto-approve"
+                //sh label: '', script: "terraform destroy -auto-approve"
+            }
+        }       
+    }
+}
