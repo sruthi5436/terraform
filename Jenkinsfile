@@ -7,6 +7,8 @@ pipeline {
         AZURE_SECRET_ID = credentials('azure-secret-id')
        GITHUB_CREDENTIALS_ID = credentials('github-credentials-id')
        GITHUB_TOKEN_CREDS = credentials('github-token-credential-id')
+        GITHUB_TOKEN_CREDS1 = credentials('github_ptoken')
+       
     }
     
     stages {
@@ -22,11 +24,11 @@ pipeline {
          stage('Checkout') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: env.GITHUB_TOKEN_CREDS, variable: 'GITHUB_TOKEN')]) {
+                    withCredentials([string(credentialsId: env.GITHUB_TOKEN_CREDS1, variable: 'GITHUB_TOKEN')]) {
                         git branch: 'main', url: 'https://github.com/your/repository.git', 
                             credentialsProvider: [
                                 usernamePassword(
-                                    password: env.GITHUB_TOKEN_CREDS,
+                                    password: env.GITHUB_TOKEN_CREDS1,
                                     username: ''
                                 )
                             ]
