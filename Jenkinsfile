@@ -12,6 +12,12 @@ pipeline {
     }
 
     stages {
+    
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/sruthi5436/terraform.git'
+            }
+        }
          stage('Azure Login') {
             steps {
                 script {
@@ -20,11 +26,6 @@ pipeline {
                      sh "az login --service-principal -u ${AZURE_CLIENT_ID} -p ${AZURE_SECRET_ID} --tenant ${AZURE_TENANT_ID}"
                     sh "az account set -s ${SUBSCRIPTION_ID}"
                 }
-            }
-        }
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/sruthi5436/terraform.git'
             }
         }
         
