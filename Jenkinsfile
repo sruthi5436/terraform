@@ -56,7 +56,7 @@ pipeline {
             steps {
                 dir('terraform') {
                     sleep time: 60, unit: 'SECONDS'
-                    sh 'terraform destroy'
+                    sh 'terraform destroy -auto-approve'
                 }
             }
         }
