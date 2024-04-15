@@ -12,21 +12,31 @@ pipeline {
     }
     
     stages {
-         stage('Checkout') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: github-token-credential-id)]) {
-                        git branch: 'main', url: 'https://github.com/your/repository.git', 
-                            credentialsProvider: [
-                                usernamePassword(
-                                    password: github-token-credential-id,
-                                    username: ''
-                                )
-                            ]
-                    }
-                }
+        stage('Checkout') {
+    steps {
+        script {
+            withCredentials([string(credentialsId: 'github-token-credential-id')]) {
+                git branch: 'main', url: 'https://github.com/your/repository.git', credentialsId: 'github-token-credential-id'
             }
-         }
+        }
+    }
+}
+
+         // stage('Checkout') {
+         //    steps {
+         //        script {
+         //            withCredentials([string(credentialsId: github-token-credential-id)]) {
+         //                git branch: 'main', url: 'https://github.com/your/repository.git', 
+         //                    credentialsProvider: [
+         //                        usernamePassword(
+         //                            password: github-token-credential-id,
+         //                            username: ''
+         //                        )
+         //                    ]
+         //            }
+         //        }
+         //    }
+         //   }
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
