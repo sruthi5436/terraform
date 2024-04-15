@@ -18,6 +18,7 @@ variable "vm_name" {
 variable "os_disk_size_gb" {
   description = "The size of the OS disk for the virtual machine (in gigabytes)."
   type        = number
+  default     = 1
 }
 variable "vm_admin_username" {
   description = "The username for the VM administrator"
