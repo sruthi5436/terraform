@@ -17,6 +17,12 @@ pipeline {
         //         sh 'mvn clean package'
         //     }
         // }
+         stage('Checkout') {
+            steps {
+                // Enable debug output for Git operations
+                checkout scm
+            }
+        }
         
         stage('Terraform Apply') {
             steps {
