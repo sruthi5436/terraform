@@ -53,5 +53,12 @@ pipeline {
                 }
             }
         }
+         stage('Terraform Destroy') {
+            steps {
+                dir('terraform') {
+                    sh 'terraform destroy'
+                }
+            }
+        }
     }
 }
