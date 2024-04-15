@@ -11,24 +11,17 @@ pipeline {
         stage('Build') {
             steps {
                 // Checkout source code from version control
-                git 'https://github.com/your/repository.git'
+                git 'https://github.com/sruthi5436/terraform.git'
                 
                 // Build Java application using Maven
                 sh 'mvn clean package'
             }
         }
         
-        stage('Docker Build') {
-            steps {
-                // Build Docker image using Dockerfile
-                sh 'docker build -t your-image-name .'
-            }
-        }
-        
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
-                git 'https://github.com/your/terraform-repo.git'
+                git 'https://github.com/sruthi5436/terraform.git'
                 
                 // Initialize Terraform
                 sh 'terraform init'
@@ -38,17 +31,6 @@ pipeline {
             }
         }
         
-        stage('Deploy') {
-            steps {
-                // Copy the built package to the VM
-                sh 'scp target/your-application.jar user@vm-ip:/path/to/deployment/'
-                
-                // SSH into the VM and deploy the package
-                sh 'ssh user@vm-ip "sudo systemctl stop your-application"'
-                sh 'ssh user@vm-ip "sudo cp /path/to/deployment/your-application.jar /opt/your-application/"'
-                sh 'ssh user@vm-ip "sudo systemctl start your-application"'
-            }
-        }
     }
 }
 
