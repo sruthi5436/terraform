@@ -26,6 +26,7 @@ pipeline {
                     }
                 }
             }
+         }
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
@@ -43,6 +44,6 @@ pipeline {
             }
         }
     }
-}
+
 }
         
