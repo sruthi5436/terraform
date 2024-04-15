@@ -7,7 +7,7 @@ pipeline {
         AZURE_SECRET_ID = credentials('azure-secret-id')
         GITHUB_CREDENTIALS_ID = credentials('github-credentials-id')
         GITHUB_TOKEN_CREDS = credentials('github-token-credential-id')
-        GITHUB_TOKEN_CREDS1 = credentials('github_ptoken')
+      //  GITHUB_TOKEN_CREDS1 = credentials('github_ptoken')
         SUBSCRIPTION_ID = credentials('subscription_id')  
     }
     
@@ -15,7 +15,7 @@ pipeline {
          stage('Checkout') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: github-token-credential-id, variable: 'GITHUB_TOKEN')]) {
+                    withCredentials([string(credentialsId: github-token-credential-id)]) {
                         git branch: 'main', url: 'https://github.com/your/repository.git', 
                             credentialsProvider: [
                                 usernamePassword(
@@ -30,7 +30,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
-               // git 'https://github.com/your/terraform-repo.git'
+                git 'https://github.com/your/terraform-repo.git'
                 
      git branch: 'main', credentialsId: 'github-credentials-id', url: 'https://github.com/sruthi5436/terraform/tree/main/terraform'
 
