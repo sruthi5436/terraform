@@ -49,6 +49,7 @@ pipeline {
             steps {
                 dir('terraform') {
                     sh 'terraform apply -auto-approve tfplan'
+                    sh 'terraform destroy tfplan'
                 }
             }
         }
