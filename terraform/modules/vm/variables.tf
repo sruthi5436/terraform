@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "The name of the resource group where the VM will be created."
   type        = string
-  default = "testvm2rg"
+  default = "connect"
 }
 
 variable "location" {
