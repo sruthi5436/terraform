@@ -20,7 +20,7 @@ pipeline {
         
         stage('Terraform Init') {
             steps {
-                 dir(terraform) {
+                 dir('terraform') {
                     sh 'terraform init'
                 }
             }
@@ -28,7 +28,7 @@ pipeline {
         
        stage('Terraform Plan') {
             steps {
-                dir(terraform) {
+                dir('terraform') {
                     sh 'terraform plan -out=tfplan'
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
         
        stage('Terraform Apply') {
             steps {
-                dir(terraform) {
+                dir('terraform') {
                     sh 'terraform apply -auto-approve tfplan'
                 }
             }
