@@ -8,15 +8,15 @@ pipeline {
     }
     
     stages {
-        stage('Build') {
-            steps {
-                // Checkout source code from version control
-                git 'https://github.com/sruthi5436/terraform.git'
+        // stage('Build') {
+        //     steps {
+        //         // Checkout source code from version control
+        //         git 'https://github.com/sruthi5436/terraform.git'
                 
-                // Build Java application using Maven
-                sh 'mvn clean package'
-            }
-        }
+        //         // Build Java application using Maven
+        //         sh 'mvn clean package'
+        //     }
+        // }
         
         stage('Terraform Apply') {
             steps {
