@@ -12,20 +12,25 @@ pipeline {
     }
     
     stages {
-        // stage('Build') {
-        //     steps {
-        //         // Checkout source code from version control
-        //         git 'https://github.com/your/repository.git'
-                
-        //         // Build Java application using Maven
-        //         sh 'mvn clean package'
-        //     }
-        // }
-        
+         stage('Checkout') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: github-token-credential-id, variable: 'GITHUB_TOKEN')]) {
+                        git branch: 'main', url: 'https://github.com/your/repository.git', 
+                            credentialsProvider: [
+                                usernamePassword(
+                                    password: github-token-credential-id,
+                                    username: ''
+                                )
+                            ]
+                    }
+                }
+            }
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
                // git 'https://github.com/your/terraform-repo.git'
+                
      git branch: 'main', credentialsId: 'github-credentials-id', url: 'https://github.com/sruthi5436/terraform/tree/main/terraform'
 
                 
