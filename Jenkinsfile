@@ -12,6 +12,14 @@ pipeline {
     }
 
     stages {
+         stage('Azure Login') {
+            steps {
+                script {
+                    // Execute the 'az login' command
+                    sh 'az login'
+                }
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/sruthi5436/terraform.git'
