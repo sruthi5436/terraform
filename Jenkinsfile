@@ -26,7 +26,7 @@ pipeline {
             steps {
                 // Checkout Terraform configurations from version control
                // git 'https://github.com/your/terraform-repo.git'
-     git branch: 'main', credentialsId: 'github-credentials-id', url: 'https://github.com/sruthi5436/terraform.git'
+     git branch: 'main', credentialsId: 'github-credentials-id', url: 'https://github.com/sruthi5436/terraform/tree/main/terraform'
 
                 
                 // Initialize Terraform
