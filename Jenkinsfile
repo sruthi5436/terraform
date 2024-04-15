@@ -17,19 +17,13 @@ pipeline {
         //         sh 'mvn clean package'
         //     }
         // }
-         stage('Checkout') {
-            steps {
-                // Enable debug output for Git operations
-                checkout scm
-            }
-        }
         
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
-         git branch: 'main', url: 'https://github.com/your/repository.git'
+        // git branch: 'main', url: 'https://github.com/your/repository.git'
 
-              //  git 'https://github.com/sruthi5436/terraform.git'
+               git 'https://github.com/sruthi5436/terraform.git'
                 
                 // Initialize Terraform
                 sh 'terraform init'
