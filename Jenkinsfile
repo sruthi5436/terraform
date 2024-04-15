@@ -40,9 +40,9 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
-                git 'https://github.com/your/terraform-repo.git'
+               // git 'https://github.com/your/terraform-repo.git'
                 
-     git branch: 'main', credentialsId: 'github-credentials-id', url: 'https://github.com/sruthi5436/terraform/tree/main/terraform'
+     git branch: 'main', credentialsId: 'github-credentials-id', url: 'terraform'
 
                 
                 // Initialize Terraform
