@@ -6,6 +6,7 @@ pipeline {
         AZURE_OBJECT_ID = credentials('azure-object-id')
         AZURE_SECRET_ID = credentials('azure-secret-id')
        GITHUB_CREDENTIALS_ID = credentials('github-credentials-id')
+       GITHUB_TOKEN_CREDS = credentials('github-token-credential-id')
     }
     
     stages {
@@ -22,7 +23,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
-        git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: 'https://github.com/your/repository.git'
+        git branch: 'main', credentialsId: env.GITHUB_TOKEN_CREDS, url: 'https://github.com/your/repository.git'
 
               // git 'https://github.com/sruthi5436/terraform.git'
                 
