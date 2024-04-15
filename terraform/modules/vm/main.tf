@@ -46,7 +46,9 @@ resource "azurerm_linux_virtual_machine" "example" {
   ]
   size                = var.vm_size
 
-  admin_username      = var.vm_admin_username
+   admin_username      = var.vm_admin_username
+  disable_password_authentication = false
+
   admin_password      = var.vm_admin_password
 
   os_disk {
