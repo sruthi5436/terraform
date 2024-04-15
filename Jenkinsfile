@@ -21,7 +21,9 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
-                git 'https://github.com/sruthi5436/terraform.git'
+         git branch: 'main', url: 'https://github.com/your/repository.git'
+
+              //  git 'https://github.com/sruthi5436/terraform.git'
                 
                 // Initialize Terraform
                 sh 'terraform init'
