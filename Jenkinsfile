@@ -24,7 +24,7 @@ pipeline {
                     // Execute the 'az login' command
                   //  sh 'az login'
                      sh "az login --service-principal -u ${AZURE_CLIENT_ID} -p ${AZURE_SECRET_ID} --tenant ${AZURE_TENANT_ID}"
-                    sh "az account set -s ${SUBSCRIPTION_ID}"
+                   // sh "az account set -s ${SUBSCRIPTION_ID}"
                 }
             }
         }
