@@ -5,8 +5,8 @@ pipeline {
         AZURE_TENANT_ID = credentials('azure-tenant-id')
         AZURE_OBJECT_ID = credentials('azure-object-id')
         AZURE_SECRET_ID = credentials('azure-secret-id')
-       GITHUB_CREDENTIALS_ID = credentials('github-credentials-id')
-       GITHUB_TOKEN_CREDS = credentials('github-token-credential-id')
+        GITHUB_CREDENTIALS_ID = credentials('github-credentials-id')
+        GITHUB_TOKEN_CREDS = credentials('github-token-credential-id')
         GITHUB_TOKEN_CREDS1 = credentials('github_ptoken')
        
     }
@@ -21,27 +21,27 @@ pipeline {
         //         sh 'mvn clean package'
         //     }
         // }
-         stage('Checkout') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: env.GITHUB_TOKEN_CREDS1, variable: 'GITHUB_TOKEN')]) {
-                        git branch: 'main', url: 'https://github.com/your/repository.git', 
-                            credentialsProvider: [
-                                usernamePassword(
-                                    password: env.GITHUB_TOKEN_CREDS1,
-                                    username: ''
-                                )
-                            ]
-                    }
-                }
-            }
-        }
+        //  stage('Checkout') {
+        //     steps {
+        //         script {
+        //             withCredentials([string(credentialsId: env.GITHUB_TOKEN_CREDS1, variable: 'GITHUB_TOKEN')]) {
+        //                 git branch: 'main', url: 'https://github.com/your/repository.git', 
+        //                     credentialsProvider: [
+        //                         usernamePassword(
+        //                             password: env.GITHUB_TOKEN_CREDS1,
+        //                             username: ''
+        //                         )
+        //                     ]
+        //             }
+        //         }
+        //     }
+        // }
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
-        //git branch: 'main', credentialsId: env.GITHUB_TOKEN_CREDS, url: 'https://github.com/your/repository.git'
+        git branch: 'main', credentialsId: env.GITHUB_TOKEN_CREDS, url: 'https://github.com/your/repository.git'
 
-              git 'https://github.com/sruthi5436/terraform.git'
+            //  git 'https://github.com/sruthi5436/terraform.git'
                 
                 // Initialize Terraform
                 sh 'terraform init'
