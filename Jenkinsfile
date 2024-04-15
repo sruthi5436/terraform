@@ -19,13 +19,27 @@ pipeline {
         //         sh 'mvn clean package'
         //     }
         // }
-        
+         stage('Checkout') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: env.GITHUB_TOKEN_CREDS, variable: 'GITHUB_TOKEN')]) {
+                        git branch: 'main', url: 'https://github.com/your/repository.git', 
+                            credentialsProvider: [
+                                usernamePassword(
+                                    password: env.GITHUB_TOKEN,
+                                    username: ''
+                                )
+                            ]
+                    }
+                }
+            }
+        }
         stage('Terraform Apply') {
             steps {
                 // Checkout Terraform configurations from version control
-        git branch: 'main', credentialsId: env.GITHUB_TOKEN_CREDS, url: 'https://github.com/your/repository.git'
+        //git branch: 'main', credentialsId: env.GITHUB_TOKEN_CREDS, url: 'https://github.com/your/repository.git'
 
-              // git 'https://github.com/sruthi5436/terraform.git'
+              git 'https://github.com/sruthi5436/terraform.git'
                 
                 // Initialize Terraform
                 sh 'terraform init'
