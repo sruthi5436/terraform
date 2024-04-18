@@ -52,13 +52,13 @@ pipeline {
                 }
             }
         }
-        //  stage('Terraform Destroy') {
-        //     steps {
-        //         dir('terraform') {
-        //             sleep time: 60, unit: 'SECONDS'
-        //             sh 'terraform destroy -auto-approve'
-        //         }
-        //     }
-        // }
+         stage('Terraform Destroy') {
+            steps {
+                dir('terraform') {
+                    sleep time: 60, unit: 'SECONDS'
+                    sh 'terraform destroy -auto-approve'
+                }
+            }
+        }
     }
 }
